@@ -481,7 +481,7 @@ def parse_opt(known=False):
     parser.add_argument('--data', type=str, default=ROOT / 'data/yimlie.yaml', help='dataset.yaml path')
     parser.add_argument('--hyp', type=str, default=ROOT / 'data/hyps/hyp.scratch-low.yaml', help='hyperparameters path')
     parser.add_argument('--epochs', type=int, default=300, help='total training epochs')
-    parser.add_argument('--batch-size', type=int, default=16, help='total batch size for all GPUs, -1 for autobatch')
+    parser.add_argument('--batch-size', type=int, default=32, help='total batch size for all GPUs, -1 for autobatch')
     parser.add_argument('--imgsz', '--img', '--img-size', type=int, default=640, help='train, val image size (pixels)')
     parser.add_argument('--rect', action='store_true', help='rectangular training')
     parser.add_argument('--resume', nargs='?', const=True, default=False, help='resume most recent training')#断点续训：即是否在之前训练的一个模型基础上继续训练，default 值默认是 false
@@ -496,9 +496,9 @@ def parse_opt(known=False):
     parser.add_argument('--device', default='', help='cuda device, i.e. 0 or 0,1,2,3 or cpu')
     parser.add_argument('--multi-scale', action='store_true', help='vary img-size +/- 50%%')#是否启用多尺度训练，默认是不开启的；多尺度训练是指设置几种不同的图片输入尺度，训练时每隔一定iterations随机选取一种尺度训练，这样训练出来的模型鲁棒性更强。
     parser.add_argument('--single-cls', action='store_true', help='train multi-class data as single-class')#设定训练数据集是单类别还是多类别；默认为 false多类别
-    parser.add_argument('--optimizer', type=str, choices=['SGD', 'Adam', 'AdamW'], default='AdamW', help='optimizer')
+    parser.add_argument('--optimizer', type=str, choices=['SGD', 'Adam', 'AdamW'], default='SGD', help='optimizer')
     parser.add_argument('--sync-bn', action='store_true', help='use SyncBatchNorm, only available in DDP mode')#是否开启跨卡同步BN；开启参数后即可使用 SyncBatchNorm多 GPU 进行分布式训
-    parser.add_argument('--workers', type=int, default=8, help='max dataloader workers (per RANK in DDP mode)')#最大worker数量；这里经常出问题，建议设置成0
+    parser.add_argument('--workers', type=int, default=6, help='max dataloader workers (per RANK in DDP mode)')#最大worker数量；这里经常出问题，建议设置成0
     parser.add_argument('--project', default=ROOT / 'runs/train', help='save to project/name')#指定训练好的模型的保存路径；默认在runs/train
     parser.add_argument('--name', default='exp', help='save to project/name')#设定保存的模型文件夹名，默认在exp
     parser.add_argument('--exist-ok', action='store_true', help='existing project/name ok, do not increment')
