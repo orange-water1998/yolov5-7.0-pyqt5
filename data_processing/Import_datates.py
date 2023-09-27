@@ -5,7 +5,7 @@ from PIL import  Image
 import cv2
 import numpy as np
 from skimage import io#使用IO库读取tif图片
-
+#123
 parser = argparse.ArgumentParser()
 #需要分类的图片类型
 parser.add_argument('--type', default='.tiff', type=str, help='input oring label path')
