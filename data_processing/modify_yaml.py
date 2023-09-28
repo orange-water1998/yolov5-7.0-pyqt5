@@ -1,6 +1,6 @@
 import yaml
 import argparse
-#1233
+
 
 # def updata_yaml(k,v,yaml_path):
 #     old_data=read_yaml_all(yaml_path) #读取文件数据

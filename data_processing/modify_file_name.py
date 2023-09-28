@@ -24,9 +24,9 @@ class BatchRename():
             txt_name=item.split('.')[0]
             n = 4 - len(str(i))
             src1 = os.path.join(os.path.abspath(self.path1), item)
-            dst1 = os.path.join(os.path.abspath(self.path1), 'c9_' + str(0) * n + str(i) +'.' +final_item)
+            dst1 = os.path.join(os.path.abspath(self.path1), 'c9' + str(0) * n + str(i) +'.' +final_item)
             src2 = os.path.join(os.path.abspath(self.path2), txt_name+'.txt')
-            dst2 = os.path.join(os.path.abspath(self.path2), 'c9_' + str(0) * n + str(i) + '.txt')
+            dst2 = os.path.join(os.path.abspath(self.path2), 'c9' + str(0) * n + str(i) + '.txt')
             try:
 
                 os.rename(src1, dst1)
