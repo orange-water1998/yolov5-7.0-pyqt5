@@ -6,9 +6,9 @@ import argparse
 from os import getcwd
 parser = argparse.ArgumentParser()
 #xml文件的地址，根据自己的数据进行修改 xml一般存放在Annotations下
-parser.add_argument('--xml_path', default='../datasets/images', type=str, help='input xml label path')
+parser.add_argument('--xml_path', default='../datasets22/images', type=str, help='input xml label path')
 #数据集的划分，地址选择自己数据下的ImageSets/Main
-parser.add_argument('--txt_path', default='../datasets/ImageSets/Main', type=str, help='output txt label path')
+parser.add_argument('--txt_path', default='../datasets22/ImageSets/Main', type=str, help='output txt label path')
 opt = parser.parse_args()
 
 trainval_percent = 0.9
@@ -49,11 +49,20 @@ file_test.close()
 
 sets = ['train', 'val', 'test']
 project_path = os.path.abspath('../')
+def run():
+    if not os.path.exists('../datasets22/labels/'):
+        os.makedirs('../datasets22/labels/')
+    image_ids = open('../datasets22/imageSets/Main/%s.txt' % (image_set)).read().strip().split()
+    list_file = open('../datasets22/%s.txt' % (image_set), 'w')
+    for image_id in image_ids:
+        list_file.write(project_path+'\datasets\images\%s\n' % (image_id))
+    list_file.close()
+
 for image_set in sets:
-    if not os.path.exists('../datasets/labels/'):
-        os.makedirs('../datasets/labels/')
-    image_ids = open('../datasets/imageSets/Main/%s.txt' % (image_set)).read().strip().split()
-    list_file = open('../datasets/%s.txt' % (image_set), 'w')
+    if not os.path.exists('../datasets22/labels/'):
+        os.makedirs('../datasets22/labels/')
+    image_ids = open('../datasets22/imageSets/Main/%s.txt' % (image_set)).read().strip().split()
+    list_file = open('../datasets22/%s.txt' % (image_set), 'w')
     for image_id in image_ids:
         list_file.write(project_path+'\datasets\images\%s\n' % (image_id))
     list_file.close()

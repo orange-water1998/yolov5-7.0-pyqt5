@@ -1,10 +1,8 @@
 
-import os,sys
+import os
 import argparse
 from PIL import  Image
-import cv2
-import numpy as np
-from skimage import io#使用IO库读取tif图片
+#from skimage import io#使用IO库读取tif图片
 
 parser = argparse.ArgumentParser()
 #需要分类的图片类型
@@ -12,11 +10,11 @@ parser.add_argument('--type', default='.tiff', type=str, help='input oring label
 #原始文件的地址，存放图片和txt文档
 parser.add_argument('--orin_path', default='G:\隐裂数据集\隐裂测试训练\图片\不规则隐裂', type=str, help='input oring label path')
 #保存文件夹
-parser.add_argument('--datasets_path', default='../datasets', type=str, help='output image label path')
+parser.add_argument('--datasets_path', default='../datasets22', type=str, help='output image label path')
 #保存图片的地址
-parser.add_argument('--Images_path', default='../datasets/images', type=str, help='output image label path')
+parser.add_argument('--Images_path', default='../datasets22/images', type=str, help='output image label path')
 #保存txt的地址
-parser.add_argument('--labels_path', default='../datasets/labels', type=str, help='output txt label path')
+parser.add_argument('--labels_path', default='../datasets22/labels', type=str, help='output txt label path')
 opt = parser.parse_args()
 type = opt.type
 orin_path = opt.orin_path

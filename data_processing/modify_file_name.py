@@ -8,8 +8,8 @@ import re
 class BatchRename():
     def __init__(self):
         # 我的图片文件夹路径
-        self.path1 = '../datasets/images'
-        self.path2 = '../datasets/labels'
+        self.path1 = '../datasets22/images'
+        self.path2 = '../datasets22/labels'
 
     def rename(self):
         filelist = os.listdir(self.path1)

@@ -3,7 +3,7 @@
 # Example usage: python train.py --data coco.yaml
 # parent
 # ├── yolov5
-# └── datasets
+# └── datasets22
 #     └── coco  ← downloads here (20.1 GB)
 
 

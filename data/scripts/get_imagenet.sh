@@ -4,7 +4,7 @@
 # Example usage: bash data/scripts/get_imagenet.sh
 # parent
 # ├── yolov5
-# └── datasets
+# └── datasets22
 #     └── imagenet  ← downloads here
 
 # Arguments (optional) Usage: bash data/scripts/get_imagenet.sh --train --val
@@ -21,7 +21,7 @@ else
 fi
 
 # Make dir
-d='../datasets/imagenet' # unzip directory
+d='../datasets22/imagenet' # unzip directory
 mkdir -p $d && cd $d
 
 # Download/unzip train

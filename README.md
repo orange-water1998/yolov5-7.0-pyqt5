@@ -399,7 +399,7 @@ Validate YOLOv5m-cls accuracy on ImageNet-1k dataset:
 
 ```bash
 bash data/scripts/get_imagenet.sh --val  # download ImageNet val split (6.3G, 50000 images)
-python classify/val.py --weights yolov5m-cls.pt --data ../datasets/imagenet --img 224  # validate
+python classify/val.py --weights yolov5m-cls.pt --data ../datasets22/imagenet --img 224  # validate
 ```
 
 ### Predict

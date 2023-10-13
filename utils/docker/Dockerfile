@@ -50,7 +50,7 @@ ENV DEBIAN_FRONTEND teletype
 # t=ultralytics/yolov5:latest && sudo docker pull $t && sudo docker run -it --ipc=host --gpus all $t
 
 # Pull and Run with local directory access
-# t=ultralytics/yolov5:latest && sudo docker pull $t && sudo docker run -it --ipc=host --gpus all -v "$(pwd)"/datasets:/usr/src/datasets $t
+# t=ultralytics/yolov5:latest && sudo docker pull $t && sudo docker run -it --ipc=host --gpus all -v "$(pwd)"/datasets22:/usr/src/datasets22 $t
 
 # Kill all
 # sudo docker kill $(sudo docker ps -q)

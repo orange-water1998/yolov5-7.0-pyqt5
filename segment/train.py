@@ -1,7 +1,7 @@
 # YOLOv5 🚀 by Ultralytics, AGPL-3.0 license
 """
 Train a YOLOv5 segment model on a segment dataset
-Models and datasets download automatically from the latest YOLOv5 release.
+Models and datasets22 download automatically from the latest YOLOv5 release.
 
 Usage - Single-GPU training:
     $ python segment/train.py --data coco128-seg.yaml --weights yolov5s-seg.pt --img 640  # from pretrained (recommended)

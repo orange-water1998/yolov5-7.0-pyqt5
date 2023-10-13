@@ -52,13 +52,13 @@ def construct_dataset(clearml_info_string):
 
 
 class ClearmlLogger:
-    """Log training runs, datasets, models, and predictions to ClearML.
+    """Log training runs, datasets22, models, and predictions to ClearML.
 
     This logger sends information to ClearML at app.clear.ml or to your own hosted server. By default,
     this information includes hyperparameters, system configuration and metrics, model metrics, code information and
     basic data metrics and analyses.
 
-    By providing additional command line arguments to train.py, datasets,
+    By providing additional command line arguments to train.py, datasets22,
     models and predictions can also be logged.
     """
 
@@ -106,7 +106,7 @@ class ClearmlLogger:
             # Get ClearML Dataset Version if requested
             if opt.data.startswith('clearml://'):
                 # data_dict should have the following keys:
-                # names, nc (number of classes), test, train, val (all three relative paths to ../datasets)
+                # names, nc (number of classes), test, train, val (all three relative paths to ../datasets22)
                 self.data_dict = construct_dataset(opt.data)
                 # Set data to data_dict because wandb will crash without this information and opt is the best way
                 # to give it to them

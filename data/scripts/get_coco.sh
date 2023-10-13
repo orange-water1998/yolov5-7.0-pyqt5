@@ -4,7 +4,7 @@
 # Example usage: bash data/scripts/get_coco.sh
 # parent
 # ├── yolov5
-# └── datasets
+# └── datasets22
 #     └── coco  ← downloads here
 
 # Arguments (optional) Usage: bash data/scripts/get_coco.sh --train --val --test --segments
@@ -25,7 +25,7 @@ else
 fi
 
 # Download/unzip labels
-d='../datasets' # unzip directory
+d='../datasets22' # unzip directory
 url=https://github.com/ultralytics/yolov5/releases/download/v1.0/
 if [ "$segments" == "true" ]; then
   f='coco2017labels-segments.zip' # 168 MB
@@ -36,7 +36,7 @@ echo 'Downloading' $url$f ' ...'
 curl -L $url$f -o $f -# && unzip -q $f -d $d && rm $f &
 
 # Download/unzip images
-d='../datasets/coco/images' # unzip directory
+d='../datasets22/coco/images' # unzip directory
 url=http://images.cocodataset.org/zips/
 if [ "$train" == "true" ]; then
   f='train2017.zip' # 19G, 118k images

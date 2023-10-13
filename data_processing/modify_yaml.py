@@ -24,11 +24,11 @@ def get_classes(classes_path):
 #
 # parser = argparse.ArgumentParser()
 # parser.add_argument('--yaml_path', default='malairisheng.yaml', type=str, help='input yaml_path')
-# parser.add_argument('--classes2_path', default='../datasets/labels/classes.txt', type=str, help='input classes_path')
+# parser.add_argument('--classes2_path', default='../datasets22/labels/classes.txt', type=str, help='input classes_path')
 
 if __name__ == '__main__':
     # opt = parser.parse_args()
     # classes2 = opt.classes_path2
     # yaml_path = opt.yaml_path
-    classes , _ = get_classes('../datasets/labels/classes.txt')
+    classes , _ = get_classes('../datasets22/labels/classes.txt')
     # updata_yaml('names',classses,yaml_path)

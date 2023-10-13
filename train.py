@@ -1,7 +1,7 @@
 # YOLOv5 🚀 by Ultralytics, AGPL-3.0 license
 """
 Train a YOLOv5 model on a custom dataset.
-Models and datasets download automatically from the latest YOLOv5 release.
+Models and datasets22 download automatically from the latest YOLOv5 release.
 
 Usage - Single-GPU training:
     $ python train.py --data coco128.yaml --weights yolov5s.pt --img 640  # from pretrained (recommended)
@@ -67,7 +67,7 @@ from utils.metrics import fitness
 from utils.plots import plot_evolve
 from utils.torch_utils import (EarlyStopping, ModelEMA, de_parallel, select_device, smart_DDP, smart_optimizer,
                                smart_resume, torch_distributed_zero_first)
-
+import lib.global_val as GLV
 LOCAL_RANK = int(os.getenv('LOCAL_RANK', -1))  # https://pytorch.org/docs/stable/elastic/run.html
 RANK = int(os.getenv('RANK', -1))
 WORLD_SIZE = int(os.getenv('WORLD_SIZE', 1))
@@ -271,7 +271,10 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
     for epoch in range(start_epoch, epochs):  # epoch ------------------------------------------------------------------
         callbacks.run('on_train_epoch_start')
         model.train()
-
+        stop_train = GLV.get_value_1('stop_train')
+        if stop_train == 'True_stop':
+            print("训练已经截至")
+            break
         # Update image weights (optional, single-GPU only)
         if opt.image_weights:
             cw = model.class_weights.cpu().numpy() * (1 - maps) ** 2 / nc  # class weights
@@ -400,6 +403,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
                 del ckpt
                 callbacks.run('on_model_save', last, epoch, final_epoch, best_fitness, fi)
 
+
         # EarlyStopping
         if RANK != -1:  # if DDP training
             broadcast_list = [stop if RANK == 0 else None]
@@ -410,6 +414,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
             break  # must break all DDP ranks
 
         # end epoch ----------------------------------------------------------------------------------------------------
+
     # end training -----------------------------------------------------------------------------------------------------
     if RANK in {-1, 0}:
         LOGGER.info(f'\n{epoch - start_epoch + 1} epochs completed in {(time.time() - t0) / 3600:.3f} hours.')
@@ -436,7 +441,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
                         callbacks.run('on_fit_epoch_end', list(mloss) + list(results) + lr, epoch, best_fitness, fi)
 
         callbacks.run('on_train_end', last, best, epoch, results)
-
+    print('训练已终止')
     torch.cuda.empty_cache()
     return results
 

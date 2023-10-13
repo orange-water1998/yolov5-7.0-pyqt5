@@ -392,7 +392,7 @@ python -m torch.distributed.run --nproc_per_node 4 --master_port 1 classify/trai
 
 ```bash
 bash data/scripts/get_imagenet.sh --val  # download ImageNet val split (6.3G, 50000 images)
-python classify/val.py --weights yolov5m-cls.pt --data ../datasets/imagenet --img 224  # validate
+python classify/val.py --weights yolov5m-cls.pt --data ../datasets22/imagenet --img 224  # validate
 ```
 
 ### 预测
