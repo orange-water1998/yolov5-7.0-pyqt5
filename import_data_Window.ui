@@ -108,7 +108,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="QComboBox" name="importDataName_btn">
+      <widget class="QComboBox" name="QComboBox_file">
        <property name="minimumSize">
         <size>
          <width>300</width>
@@ -120,6 +120,9 @@
          <width>300</width>
          <height>30</height>
         </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 14pt &quot;新宋体&quot;;</string>
        </property>
        <item>
         <property name="text">

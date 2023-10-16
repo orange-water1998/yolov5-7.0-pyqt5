@@ -108,7 +108,7 @@ class Train_Window(QMainWindow,Ui_Train_MainWindow):
         self.QpushButton_background.clicked.connect(self.QComboBox_background_change)
         # self.pushButton_stop.clicked.connect(self.pushButton_stop_Click_My)#提前停止训练
         # self.pushButton_continue.clicked.connect(self.pushButton_continue_clicked_my)#继续上次训练
-
+        self.QPushButton_opentensorboard.clicked.connect(self.QPushButton_opentensorboard_click_my)
         self.QComboBox_background.addItems(["icon/休闲阶梯.jpeg", "icon/垂柳光影.jpeg", "icon/夕阳光影.jpeg",
                                                    "icon/微白墙.jpeg", "icon/浅蓝天空.jpg", "icon/粉白装饰镜.jpeg",
                                                    "icon/路灯光影.jpeg"])
@@ -285,6 +285,9 @@ class Train_Window(QMainWindow,Ui_Train_MainWindow):
     #     self.pushButton_stop.setEnabled(True)  # 激活提前停止训练按钮
     #     self.pushButton_continue.setEnabled(False)  # 激活提前停止训练按钮
 
+    #打开tensorboad
+    def QPushButton_opentensorboard_click_my(self):
+        pass
     def closeEvent(self, event):
         result = QtWidgets.QMessageBox.question(self, "Xpath Robot", "是否要退出，退出后未保存的数据将被清除?",
                                                 QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)

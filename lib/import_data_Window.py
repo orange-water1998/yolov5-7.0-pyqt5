@@ -40,6 +40,7 @@ class import_MainWindow(object):
             self.QComboBox_file = QtWidgets.QComboBox(Dialog)
             self.QComboBox_file.setMinimumSize(QtCore.QSize(300, 30))
             self.QComboBox_file.setMaximumSize(QtCore.QSize(300, 30))
+            self.QComboBox_file.setStyleSheet("font: 14pt \"新宋体\";")
             self.QComboBox_file.setObjectName("QComboBox_file")
             self.QComboBox_file.addItem("")
             self.horizontalLayout.addWidget(self.QComboBox_file)
