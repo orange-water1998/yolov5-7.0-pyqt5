@@ -172,6 +172,10 @@
   {
    "optionDest": "datas",
    "value": "D:/Anaconda_location/envs/pytorch/Lib/site-packages/torchvision-0.15.2+cu118.dist-info;torchvision-0.15.2+cu118.dist-info/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Anaconda_location/envs/pytorch/Lib/site-packages/torchvision;torchvision/"
   }
  ],
  "nonPyinstallerOptions": {

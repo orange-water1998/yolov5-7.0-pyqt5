@@ -11,7 +11,7 @@ def parse_args2():
     parser.add_argument('--weights',default='best.pt',
                         help='Input weights (.pt) file path (required)')
     parser.add_argument(
-        '--output',default='新建文件夹',  help='Output (.wts) file path (optional)')
+        '--output',default='yolov5.wts',  help='Output (.wts) file path (optional)')
     parser.add_argument(
         '--type',  type=str, default='detect', choices=['detect', 'cls', 'seg'],
         help='determines the model is detection/classification')
