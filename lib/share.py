@@ -3,3 +3,4 @@ class SI:
     new_data_ui=None
     mainWin =None
     loginWin = None
+    TensorboardWIN=None

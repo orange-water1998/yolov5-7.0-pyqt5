@@ -503,7 +503,7 @@ def parse_opt(known=False):
     parser.add_argument('--single-cls', action='store_true', help='train multi-class data as single-class')#设定训练数据集是单类别还是多类别；默认为 false多类别
     parser.add_argument('--optimizer', type=str, choices=['SGD', 'Adam', 'AdamW'], default='AdamW', help='optimizer')
     parser.add_argument('--sync-bn', action='store_true', help='use SyncBatchNorm, only available in DDP mode')#是否开启跨卡同步BN；开启参数后即可使用 SyncBatchNorm多 GPU 进行分布式训
-    parser.add_argument('--workers', type=int, default=8, help='max dataloader workers (per RANK in DDP mode)')#最大worker数量；这里经常出问题，建议设置成0
+    parser.add_argument('--workers', type=int, default=0, help='max dataloader workers (per RANK in DDP mode)')#最大worker数量；这里经常出问题，建议设置成0
     parser.add_argument('--project', default=ROOT / 'runs/train', help='save to project/name')#指定训练好的模型的保存路径；默认在runs/train
     parser.add_argument('--name', default='exp', help='save to project/name')#设定保存的模型文件夹名，默认在exp
     parser.add_argument('--exist-ok', action='store_true', help='existing project/name ok, do not increment')

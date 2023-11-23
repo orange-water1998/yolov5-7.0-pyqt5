@@ -33,7 +33,6 @@ import os
 import platform
 import sys
 from pathlib import Path
-
 import torch
 
 FILE = Path(__file__).resolve()
@@ -50,6 +49,8 @@ from utils.general import (LOGGER, Profile, check_file, check_img_size, check_im
                            increment_path, non_max_suppression, print_args, scale_boxes, strip_optimizer, xyxy2xywh)
 from utils.torch_utils import select_device, smart_inference_mode
 
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 
 @smart_inference_mode()
 def run(
@@ -84,24 +85,27 @@ def run(
     source = str(source)
     save_img = not nosave and not source.endswith('.txt')  # save inference images
     is_file = Path(source).suffix[1:] in (IMG_FORMATS + VID_FORMATS)
-    is_url = source.lower().startswith(('rtsp://', 'rtmp://', 'http://', 'https://'))
-    webcam = source.isnumeric() or source.endswith('.streams') or (is_url and not is_file)
+    is_url = source.lower().startswith(('rtsp://', 'rtmp://', 'http://', 'https://'))# 判断是否为网络流地址
+    webcam = source.isnumeric() or source.endswith('.streams') or (is_url and not is_file)# 摄像头地址/txt文件路径/网络流地址
     screenshot = source.lower().startswith('screen')
     if is_url and is_file:
         source = check_file(source)  # download
 
     # Directories
+    # 第二部分：新建一个保存结果的文件夹
     save_dir = increment_path(Path(project) / name, exist_ok=exist_ok)  # increment run
     (save_dir / 'labels' if save_txt else save_dir).mkdir(parents=True, exist_ok=True)  # make dir
 
     # Load model
+    # 第三部分：加载模型的权重
     device = select_device(device)
     model = DetectMultiBackend(weights, device=device, dnn=dnn, data=data, fp16=half)
     stride, names, pt = model.stride, model.names, model.pt
     imgsz = check_img_size(imgsz, s=stride)  # check image size
 
     # Dataloader
-    bs = 1  # batch_size
+    # 第四部分：加载待预测的图片
+    bs = 1  # batch_size # batch_size，给模型传递参数是每次一个batch，每次输入一张图片
     if webcam:
         view_img = check_imshow(warn=True)
         dataset = LoadStreams(source, img_size=imgsz, stride=stride, auto=pt, vid_stride=vid_stride)
@@ -110,34 +114,41 @@ def run(
         dataset = LoadScreenshots(source, img_size=imgsz, stride=stride, auto=pt)
     else:
         dataset = LoadImages(source, img_size=imgsz, stride=stride, auto=pt, vid_stride=vid_stride)
-    vid_path, vid_writer = [None] * bs, [None] * bs
-
+        # 返回的dataset是一个数据集对象，包含了待推理数据的路径列表，图片视频分类和总个数，步长stride等
+    vid_path, vid_writer = [None] * bs, [None] * bs# 视频路径，视频作者
+    # 第五部分：模型推理过程
+    # 把图片输入模型，产生预测结果，画出检测框
     # Run inference
     model.warmup(imgsz=(1 if pt or model.triton else bs, 3, *imgsz))  # warmup
     seen, windows, dt = 0, [], (Profile(), Profile(), Profile())
+    # 对象迭代器，先调用dataset对象的__iter__方法，返回的对象作为迭代的对象，每次循环调用__next__方法，返回值传给path, im, im0s, vid_cap, s
+    # path为该循环中文件的路径，im0s为原始图像，im为缩放后的图像（640*640），s为打印字符串信息
+    # 每次循环执行next方法：opencv导入原始图像，缩放图像（长边缩放，短边补零）
+
     for path, im, im0s, vid_cap, s in dataset:
         with dt[0]:
-            im = torch.from_numpy(im).to(model.device)
+            im = torch.from_numpy(im).to(model.device)    # 将numpy格式图像转化成torch格式，放入gpu中
             im = im.half() if model.fp16 else im.float()  # uint8 to fp16/32
-            im /= 255  # 0 - 255 to 0.0 - 1.0
+            im /= 255  # 0 - 255 to 0.0 - 1.0             #图片像素值归一化
             if len(im.shape) == 3:
-                im = im[None]  # expand for batch dim
+                im = im[None]  # expand for batch dim,增加batch维度，一次处理多少图像文件
 
         # Inference
         with dt[1]:
             visualize = increment_path(save_dir / Path(path).stem, mkdir=True) if visualize else False
-            pred = model(im, augment=augment, visualize=visualize)
-
+            pred = model(im, augment=augment, visualize=visualize)# 对图像进行模型预测，返回值为torch.Size([1,18900,85])
+            # 1为一张图像，18900为检测出的先验框，对每一个先验框：80为所属每个类别的概率，4个坐标信息，1个置信度confidence
+            # augment数据增强，visuallize可视化（将训练的特征图保存下来），这两个默认都是false
         # NMS
         with dt[2]:
             pred = non_max_suppression(pred, conf_thres, iou_thres, classes, agnostic_nms, max_det=max_det)
-
+            # 非极大值抑制：根据置信度阈值和iou阈值对预测的先验框和所属类别进行过滤，例如过滤完为[1,5,6]，6为四个坐标，两个类别概率
         # Second-stage classifier (optional)
         # pred = utils.general.apply_classifier(pred, classifier_model, im, im0s)
 
         # Process predictions
         for i, det in enumerate(pred):  # per image
-            seen += 1
+            seen += 1   # 计数，每处理一张图片加一
             if webcam:  # batch_size >= 1
                 p, im0, frame = path[i], im0s[i].copy(), dataset.count
                 s += f'{i}: '
@@ -145,12 +156,12 @@ def run(
                 p, im0, frame = path, im0s.copy(), getattr(dataset, 'frame', 0)
 
             p = Path(p)  # to Path
-            save_path = str(save_dir / p.name)  # im.jpg
+            save_path = str(save_dir / p.name)  # im.jpg # 保存图像路径
             txt_path = str(save_dir / 'labels' / p.stem) + ('' if dataset.mode == 'image' else f'_{frame}')  # im.txt
-            s += '%gx%g ' % im.shape[2:]  # print string
-            gn = torch.tensor(im0.shape)[[1, 0, 1, 0]]  # normalization gain whwh
-            imc = im0.copy() if save_crop else im0  # for save_crop
-            annotator = Annotator(im0, line_width=line_thickness, example=str(names))
+            s += '%gx%g ' % im.shape[2:]  # print string，打印输出图片尺寸字符串
+            gn = torch.tensor(im0.shape)[[1, 0, 1, 0]]  # normalization gain whwh，保存原图尺寸
+            imc = im0.copy() if save_crop else im0  # for save_crop，将检测到的物体裁剪下来单独保存
+            annotator = Annotator(im0, line_width=line_thickness, example=str(names))# 画出边框
             if len(det):
                 # Rescale boxes from img_size to im0 size
                 det[:, :4] = scale_boxes(im.shape[2:], det[:, :4], im0.shape).round()
@@ -176,7 +187,7 @@ def run(
                         save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
 
             # Stream results
-            im0 = annotator.result()
+            im0 = annotator.result()# 得到画好的图片
             if view_img:
                 if platform.system() == 'Linux' and p not in windows:
                     windows.append(p)
@@ -186,7 +197,7 @@ def run(
                 cv2.waitKey(1)  # 1 millisecond
 
             # Save results (image with detections)
-            if save_img:
+            if save_img:   # 保存图片
                 if dataset.mode == 'image':
                     cv2.imwrite(save_path, im0)
                 else:  # 'video' or 'stream'
@@ -219,8 +230,8 @@ def run(
 
 def parse_opt():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--weights', nargs='+', type=str, default=ROOT / 'runs/train/Adamw隐裂系列/weights/best.pt', help='model path or triton URL')
-    parser.add_argument('--source', type=str, default=ROOT / 'data/images/Yinlie', help='file/dir/URL/glob/screen/0(webcam)')
+    parser.add_argument('--weights', nargs='+', type=str, default=ROOT / 'runs/train/6200图片十种缺陷隐裂系列（自标）/SGD十种缺陷/weights/best.pt', help='model path or triton URL')
+    parser.add_argument('--source', type=str, default=ROOT / 'data/images/Yinlie/bl39.tiff', help='file/dir/URL/glob/screen/0(webcam)')
     parser.add_argument('--data', type=str, default=ROOT / 'data/yimlie.yaml', help='(optional) dataset.yaml path')
     parser.add_argument('--imgsz', '--img', '--img-size', nargs='+', type=int, default=[640], help='inference size h,w')
     parser.add_argument('--conf-thres', type=float, default=0.25, help='confidence threshold')

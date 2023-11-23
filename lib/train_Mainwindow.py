@@ -228,7 +228,7 @@ class Ui_Train_MainWindow(object):
         self.label_7.setText(_translate("MainWindow", "n次无提升停止训练："))
         self.label_8.setText(_translate("MainWindow", "线程数量："))
         self.label_9.setText(_translate("MainWindow", "训练次数："))
-        self.label_11.setText(_translate("MainWindow", "损失函数："))
+        self.label_11.setText(_translate("MainWindow", "优化器："))
         self.QComboBox_optimize.setItemText(0, _translate("MainWindow", "SGD"))
         self.QComboBox_optimize.setItemText(1, _translate("MainWindow", "Adam"))
         self.QComboBox_optimize.setItemText(2, _translate("MainWindow", "AdamW"))

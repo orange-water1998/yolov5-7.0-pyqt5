@@ -42,7 +42,7 @@ class import_MainWindow(object):
             self.QComboBox_file.setMaximumSize(QtCore.QSize(300, 30))
             self.QComboBox_file.setStyleSheet("font: 14pt \"新宋体\";")
             self.QComboBox_file.setObjectName("QComboBox_file")
-            self.QComboBox_file.addItem("")
+            # self.QComboBox_file.addItem("")
             self.horizontalLayout.addWidget(self.QComboBox_file)
             spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
             self.horizontalLayout.addItem(spacerItem5)
@@ -77,6 +77,6 @@ class import_MainWindow(object):
             _translate = QtCore.QCoreApplication.translate
             Dialog.setWindowTitle(_translate("Dialog", "导入训练工程"))
             self.label.setText(_translate("Dialog", "请导入数据（已有训练工程）"))
-            self.QComboBox_file.setItemText(0, _translate("Dialog", "选择导入文件夹"))
+            # self.QComboBox_file.setItemText(0, _translate("Dialog", "选择导入文件夹"))
             self.pushButton_ok.setText(_translate("Dialog", "确定"))
             self.pushButton_cancel.setText(_translate("Dialog", "取消"))

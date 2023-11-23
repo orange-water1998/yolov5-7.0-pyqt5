@@ -65,15 +65,27 @@
     <property name="title">
      <string>检测数据</string>
     </property>
+    <addaction name="action1_new"/>
+    <addaction name="action2_import"/>
+    <addaction name="action_delete_2"/>
    </widget>
    <widget class="QMenu" name="btn_labeling">
     <property name="title">
      <string>数据标注</string>
     </property>
+    <addaction name="actionsss"/>
+   </widget>
+   <widget class="QMenu" name="menuff">
+    <property name="title">
+     <string>其他</string>
+    </property>
+    <addaction name="action_help"/>
+    <addaction name="action13344"/>
    </widget>
    <addaction name="btn_train"/>
    <addaction name="btn_detect"/>
    <addaction name="btn_labeling"/>
+   <addaction name="menuff"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_new">
@@ -107,6 +119,41 @@
      <family>新宋体</family>
      <pointsize>10</pointsize>
     </font>
+   </property>
+  </action>
+  <action name="action1_new">
+   <property name="text">
+    <string>新建测试工程</string>
+   </property>
+  </action>
+  <action name="action2_import">
+   <property name="text">
+    <string>导入测试工程</string>
+   </property>
+  </action>
+  <action name="action_delete_2">
+   <property name="text">
+    <string>删除测试工程</string>
+   </property>
+  </action>
+  <action name="action4_conbime">
+   <property name="text">
+    <string>联合测试</string>
+   </property>
+  </action>
+  <action name="actionsss">
+   <property name="text">
+    <string>开始标注</string>
+   </property>
+  </action>
+  <action name="action_help">
+   <property name="text">
+    <string>帮助</string>
+   </property>
+  </action>
+  <action name="action13344">
+   <property name="text">
+    <string>退出</string>
    </property>
   </action>
  </widget>

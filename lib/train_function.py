@@ -1,5 +1,6 @@
 import yaml
 from PyQt5.QtWidgets import *
+import lib.global_val as GLV
 
 
 def pretrain_file(self):

@@ -372,7 +372,9 @@ if __name__ == '__main__':
     # Create model
     im = torch.rand(opt.batch_size, 3, 640, 640).to(device)
     model = Model(opt.cfg).to(device)
-
+    x = torch.randn(1, 3, 640, 640).to(device)
+    script_model = torch.jit.trace(model, x)
+    script_model.save("m.pt")
     # Options
     if opt.line_profile:  # profile layer by layer
         model(im, profile=True)
