@@ -1,0 +1,181 @@
+{
+ "version": "auto-py-to-exe-configuration_v1",
+ "pyinstallerOptions": [
+  {
+   "optionDest": "noconfirm",
+   "value": true
+  },
+  {
+   "optionDest": "filenames",
+   "value": "C:/Users/26285/Desktop/yolov5_7.0_master/main.py"
+  },
+  {
+   "optionDest": "onefile",
+   "value": false
+  },
+  {
+   "optionDest": "console",
+   "value": true
+  },
+  {
+   "optionDest": "ascii",
+   "value": false
+  },
+  {
+   "optionDest": "clean_build",
+   "value": false
+  },
+  {
+   "optionDest": "strip",
+   "value": false
+  },
+  {
+   "optionDest": "noupx",
+   "value": false
+  },
+  {
+   "optionDest": "disable_windowed_traceback",
+   "value": false
+  },
+  {
+   "optionDest": "embed_manifest",
+   "value": true
+  },
+  {
+   "optionDest": "uac_admin",
+   "value": false
+  },
+  {
+   "optionDest": "uac_uiaccess",
+   "value": false
+  },
+  {
+   "optionDest": "win_private_assemblies",
+   "value": false
+  },
+  {
+   "optionDest": "win_no_prefer_redirects",
+   "value": false
+  },
+  {
+   "optionDest": "bootloader_ignore_signals",
+   "value": false
+  },
+  {
+   "optionDest": "argv_emulation",
+   "value": false
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/26285/Desktop/yolov5_7.0_master/utils;utils/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/26285/Desktop/yolov5_7.0_master/lib;lib/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/26285/Desktop/yolov5_7.0_master/data;data/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/26285/Desktop/yolov5_7.0_master/models;models/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/26285/Desktop/yolov5_7.0_master/classify;classify/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/26285/Desktop/yolov5_7.0_master/tensorboard.exe;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/26285/Desktop/yolov5_7.0_master/yolov5s.pt;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/26285/Desktop/yolov5_7.0_master/setup.cfg;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/26285/Desktop/yolov5_7.0_master/icon;icon/"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "cv2"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "pandas"
+  },
+  {
+   "optionDest": "excludes",
+   "value": "codecache "
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "importlib_resources.trees"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "ultralytics"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Anaconda_location/envs/pytorch/Lib/site-packages/ultralytics;ultralytics/"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "scipy"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Anaconda_location/envs/pytorch/Lib/site-packages/scipy.libs;scipy.libs/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Anaconda_location/envs/pytorch/Lib/site-packages/scipy-1.11.2.dist-info;scipy-1.11.2.dist-info/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Anaconda_location/envs/pytorch/Lib/site-packages/torchaudio-2.0.2+cu118.dist-info;torchaudio-2.0.2+cu118.dist-info/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Anaconda_location/envs/pytorch/Lib/site-packages/git;git/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Anaconda_location/envs/pytorch/Lib/site-packages/gitdb;gitdb/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Anaconda_location/envs/pytorch/Lib/site-packages/gitdb-4.0.10.dist-info;gitdb-4.0.10.dist-info/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Anaconda_location/envs/pytorch/Lib/site-packages/GitPython-3.1.35.dist-info;GitPython-3.1.35.dist-info/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Anaconda_location/envs/pytorch/Lib/site-packages/ultralytics-8.0.205.dist-info;ultralytics-8.0.205.dist-info/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Anaconda_location/envs/pytorch/Lib/site-packages/torch;torch/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Anaconda_location/envs/pytorch/Lib/site-packages/torchaudio;torchaudio/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Anaconda_location/envs/pytorch/Lib/site-packages/torchvision-0.15.2+cu118.dist-info;torchvision-0.15.2+cu118.dist-info/"
+  }
+ ],
+ "nonPyinstallerOptions": {
+  "increaseRecursionLimit": true,
+  "manualArguments": ""
+ }
+}
